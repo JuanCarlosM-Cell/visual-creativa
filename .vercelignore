@@ -1,0 +1,22 @@
+# Vercel Ignore File
+# Only ignore what's necessary
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Git
+.git/
+.gitignore
+
+# Documentation (optional)
+*.md
+!README.md
+
+# Scripts
+*.ps1

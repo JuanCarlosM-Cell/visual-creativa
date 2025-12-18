@@ -11,42 +11,139 @@ Esta guía te explica cómo subir tu sitio web profesionalmente.
 
 ---
 
-## 🟢 PASO 1: Crear la "Caja" en GitHub
-*(Aquí es donde vivirá tu código en la nube)*
+# 🚀 Guía de Despliegue en Vercel - Visual Creativa
 
-1.  Ve a esta dirección: **[github.com/new](https://github.com/new)**
-    *(Inicia sesión si no lo has hecho).*
-2.  En **Repository name**, escribe: `visual-creativa`
-3.  Asegúrate de que esté marcado como **Public**.
-4.  🛑 **MUY IMPORTANTE:** No toques nada más. No marques "Add a README file".
-5.  Haz clic en el botón verde **Create repository**.
+## ✅ Archivos de Configuración Actualizados
 
----
+Se han actualizado los siguientes archivos para asegurar que el diseño se vea correctamente en Vercel:
 
-## 🟢 PASO 2: Subir tu Código
-*(Mover los archivos de tu PC a la caja de GitHub)*
+1. **vercel.json** - Configuración simplificada para mejor compatibilidad
+2. **_headers** - Headers HTTP para tipos MIME correctos
+3. **.vercelignore** - Exclusión de archivos innecesarios
 
-Una vez creado el repositorio, verás una pantalla con instrucciones. Necesitamos conectar tu carpeta actual con esa nueva caja.
+## 📋 Pasos para Desplegar
 
-Abre tu terminal (PowerShell o CMD) en la carpeta del proyecto y ejecuta estos 2 comandos:
+### Opción 1: Despliegue desde Git (Recomendado)
 
-### Comando 1: Conectar
-*(Copia la línea que te da GitHub que empieza con `git remote add...`. Será algo así:)*
+1. **Hacer commit de los cambios**:
+   ```bash
+   git add .
+   git commit -m "Fix: Actualizar configuración de Vercel para CSS"
+   git push origin main
+   ```
 
-```powershell
-git remote add origin https://github.com/TU-USUARIO/visual-creativa.git
+2. **Vercel desplegará automáticamente** si tienes integración con GitHub/GitLab/Bitbucket
+
+3. **Verificar el despliegue**:
+   - Ve a tu dashboard de Vercel
+   - Espera a que termine el deployment
+   - Haz clic en "Visit" para ver tu sitio
+
+### Opción 2: Despliegue Manual con Vercel CLI
+
+1. **Instalar Vercel CLI** (si no lo tienes):
+   ```bash
+   npm install -g vercel
+   ```
+
+2. **Desplegar**:
+   ```bash
+   vercel --prod
+   ```
+
+## 🔍 Verificación Post-Despliegue
+
+Después de desplegar, verifica lo siguiente:
+
+1. **Abrir DevTools** (F12 en el navegador)
+2. **Ir a la pestaña Network/Red**
+3. **Recargar la página** (Ctrl+F5 o Cmd+Shift+R)
+4. **Verificar que todos los archivos CSS se carguen**:
+   - `estilos.css` - Status: 200 ✅
+   - `mejoras.css` - Status: 200 ✅
+   - Archivos CSS específicos de cada página - Status: 200 ✅
+
+## 🐛 Solución de Problemas
+
+### Si los estilos aún no se ven:
+
+1. **Limpiar caché de Vercel**:
+   - Ve a tu proyecto en Vercel Dashboard
+   - Settings → General → Clear Cache
+   - Redeploy
+
+2. **Verificar errores en consola**:
+   - Abre DevTools → Console
+   - Busca errores relacionados con CSS o MIME types
+
+3. **Forzar recarga sin caché**:
+   - Windows/Linux: `Ctrl + Shift + R`
+   - Mac: `Cmd + Shift + R`
+
+4. **Verificar que los archivos CSS existan en el deployment**:
+   - En Vercel Dashboard → Deployments → [tu deployment] → Source
+   - Verifica que la carpeta `css/` esté presente con todos los archivos
+
+## 📁 Estructura de Archivos Requerida
+
+Asegúrate de que tu proyecto tenga esta estructura:
+
 ```
-*(Reemplaza `TU-USUARIO` con tu nombre real de GitHub).*
-
-### Comando 2: Subir
-*(Esto empuja tus archivos a la nube)*
-
-```powershell
-git push -u origin main
+Visual Creativa/
+├── css/
+│   ├── estilos.css
+│   ├── mejoras.css
+│   ├── nosotros.css
+│   ├── servicios.css
+│   ├── contacto.css
+│   ├── chincha-tv.css
+│   ├── academia.css
+│   ├── mundo-bebe.css
+│   ├── merchandising.css
+│   ├── redes-sociales.css
+│   └── tu-detalle.css
+├── js/
+│   └── script.js
+├── img/
+├── video/
+├── index.html
+├── vercel.json
+├── _headers
+└── .vercelignore
 ```
 
-> 🔐 **¿Te pide contraseña?**
-> Si te sale una ventana, inicia sesión con tu navegador. Si te pide contraseña en la terminal, usa tu "Token de Acceso Personal" de GitHub, no tu contraseña normal.
+## ✨ Cambios Realizados
+
+### vercel.json
+- Simplificado para mejor compatibilidad
+- Vercel detecta automáticamente archivos estáticos
+- Configurado `cleanUrls` y `trailingSlash`
+
+### _headers
+- Configurados headers HTTP correctos
+- Cache-Control para optimización
+- Content-Type explícito para CSS y JS
+
+### .vercelignore
+- Excluye solo archivos innecesarios
+- Mantiene todos los archivos CSS, JS, HTML, imágenes y videos
+
+## 🎯 Resultado Esperado
+
+Después de seguir estos pasos, tu sitio debería verse exactamente como en local:
+- ✅ Header con glassmorphism
+- ✅ Banner con video de fondo
+- ✅ Tarjetas de rubros con efectos hover
+- ✅ Footer oscuro
+- ✅ Botón de WhatsApp
+- ✅ Todas las animaciones AOS
+
+## 📞 Soporte
+
+Si después de seguir todos estos pasos el problema persiste:
+1. Copia la URL de tu sitio en Vercel
+2. Abre DevTools y captura los errores de la consola
+3. Verifica la pestaña Network para ver qué archivos fallan
 
 ---
 

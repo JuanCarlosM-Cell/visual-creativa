@@ -1,0 +1,687 @@
+/* ===========================================
+   BASE + VARIABLES
+=========================================== */
+:root {
+  --header-h: 90px;
+  --naranja: #ff6b00;
+  --naranja-2: #ff8533;
+  --gris-osc: #111;
+
+  /* Control imágenes rubros (index) */
+  --rubro-img-width: 73%;
+  --rubro-img-align: center;
+  --rubro-img-height: 180px;
+  --rubro-img-radius: 16px;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --header-h: 64px;
+    --rubro-img-height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --rubro-img-height: 130px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* ===========================================
+   HEADER (Unificado para TODAS las páginas)
+=========================================== */
+.encabezado {
+  background: rgba(10, 10, 10, 0.85);
+  /* Fondo semitransparente oscuro */
+  backdrop-filter: blur(12px);
+  /* Efecto Glassmorphism */
+  -webkit-backdrop-filter: blur(12px);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  /* Sombra más sutil y moderna */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  /* Borde sutil */
+  transition: padding 0.3s ease, background 0.3s ease;
+}
+
+.encabezado .logo {
+  display: flex;
+  align-items: center;
+}
+
+.encabezado .logo img {
+  height: 85px !important;
+  transform: scale(1.35);
+  position: relative;
+  left: -22px;
+}
+
+.encabezado .logo h1 {
+  color: #fff;
+  margin: 0;
+  font-size: 1.25em;
+}
+
+.encabezado .logo h1 span {
+  color: var(--naranja);
+}
+
+/* NAV DESKTOP */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  /* Más espacio */
+  padding: 0;
+  margin: 0;
+}
+
+nav a {
+  color: rgba(255, 255, 255, 0.85);
+  /* Blanco suave */
+  text-decoration: none;
+  font-size: .95em;
+  font-weight: 500;
+  transition: all .3s ease;
+  position: relative;
+}
+
+nav a:hover,
+nav a.activo {
+  color: var(--naranja);
+}
+
+/* Efecto subrayado animado desktop */
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--naranja);
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after,
+nav a.activo::after {
+  width: 100%;
+}
+
+/* ===========================================
+   BOTÓN HAMBURGUESA (PREMIUM)
+=========================================== */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2000;
+  padding: 0;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+/* Efecto hover suave */
+.nav-toggle:active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  margin: 5px auto;
+  /* Centrado */
+  background: #fff;
+  border-radius: 4px;
+  transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  /* Animación "bote" */
+  position: relative;
+}
+
+/* Animación Icono X */
+body.nav-open .nav-toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+  background-color: var(--naranja);
+}
+
+body.nav-open .nav-toggle span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+body.nav-open .nav-toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+  background-color: var(--naranja);
+}
+
+/* NAV MÓVIL (Glassmorphism) */
+@media (max-width: 900px) {
+  nav ul {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  /* Overlay del menú */
+  body.nav-open nav ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(10, 10, 10, 0.95);
+    /* Muy oscuro, casi sólido */
+    backdrop-filter: blur(15px);
+    /* Efecto vidrio borroso */
+    -webkit-backdrop-filter: blur(15px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Pantalla completa */
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    z-index: 1500;
+    animation: fadeInMenu 0.4s ease forwards;
+  }
+
+  @keyframes fadeInMenu {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  nav ul li {
+    margin: 15px 0;
+    opacity: 0;
+    animation: slideInLi 0.4s ease forwards;
+  }
+
+  /* Retraso en cascada para items */
+  nav ul li:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+
+  nav ul li:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  nav ul li:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  nav ul li:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes slideInLi {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  nav a {
+    font-size: 1.5em;
+    /* Texto grande en móvil */
+    font-weight: 600;
+  }
+}
+
+/* ===========================================
+   BANNER HOME (CORPORATE PREMIUM)
+=========================================== */
+.banner {
+  min-height: 100vh;
+  padding-top: var(--header-h);
+  /* Mantener header fijo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: #050505;
+  overflow: hidden;
+}
+
+.banner .video-fondo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  filter: brightness(0.35) contrast(1.1);
+}
+
+/* Gradient overlay subtle */
+.banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.7) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.overlay {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  text-align: center;
+  max-width: 960px;
+  padding: 0 24px;
+}
+
+.overlay h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(3rem, 7vw, 5rem);
+  /* Más grande e impactante */
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  /* Estilo editorial compacto */
+  margin-bottom: 24px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out forwards 0.2s;
+}
+
+.overlay h2 span {
+  color: var(--naranja);
+  font-weight: 800;
+  /* Extra bold para contraste */
+}
+
+.overlay p {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0 auto 40px;
+  max-width: 760px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out forwards 0.4s;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  opacity: 0.8;
+  animation: float 2.5s ease-in-out infinite;
+}
+
+.scroll-indicator svg {
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translate(-50%, 10px);
+    opacity: 1;
+  }
+}
+
+/* BOTÓN BANNER ACTUALIZADO (Premium) */
+.btn-banner {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  padding: 18px 42px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: inline-block;
+  transition: all 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-banner:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-color: #fff;
+}
+
+/* ===========================================
+   RUBROS (INDEX) — DARK LANDING STYLE
+=========================================== */
+.rubros {
+  padding: 120px 6%;
+  background: #080808;
+  /* Fondo base oscuro */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  /* Para contener los efectos de fondo */
+  z-index: 1;
+}
+
+/* Efecto de "vida" / Landing page con ::before */
+.rubros::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255, 107, 0, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 30%);
+  z-index: -1;
+  animation: bgRotate 30s linear infinite;
+}
+
+@keyframes bgRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.rubros h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: #fff;
+  /* Texto blanco para contraste */
+  margin-bottom: 80px;
+  font-weight: 300;
+  letter-spacing: -1.5px;
+  position: relative;
+  z-index: 2;
+}
+
+.rubros h2 strong {
+  font-weight: 700;
+  color: var(--naranja);
+  /* Acento naranja */
+  background: none;
+  -webkit-text-fill-color: initial;
+  /* Reset del degradado anterior */
+}
+
+.contenedor-rubros {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  /* Tarjetas más angostas (chicas) */
+  gap: 30px;
+  /* Gap reducido también */
+  position: relative;
+  z-index: 2;
+}
+
+/* ===========================================
+   TARJETAS DE RUBROS (DARK CARD STYLE)
+=========================================== */
+/* ===========================================
+   TARJETAS DE RUBROS (DARK CARD STYLE - ROBUST FIX)
+=========================================== */
+.rubro {
+  background: #111;
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  /* BORDE + OVERFLOW PADRE (Clave para que no se salga nada) */
+  border-radius: 24px;
+  overflow: hidden;
+  /* Esto recorta todo lo que esté dentro */
+  position: relative;
+  /* Estilos visuales */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: translateZ(0);
+  /* Fix Safari */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  isolation: isolate;
+  /* Fix para z-index context */
+}
+
+.rubro:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 107, 0, 0.4);
+}
+
+/* Efecto de borde de color al hover */
+.rubro::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--naranja);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 10;
+  box-shadow: 0 0 15px var(--naranja);
+}
+
+.rubro:hover::before {
+  transform: scaleX(1);
+}
+
+/* Imagen Container (Simplificado y Reforzado) */
+.rubro-img-container {
+  width: 100%;
+  height: 190px;
+  /* Altura más compacta */
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  /* Redundancia necesaria para algunos navegadores */
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  background: #000;
+  /* Fondo para evitar huecos */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Filtro oscuro sobre imagen */
+.rubro-img-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  border-top-left-radius: 24px;
+  /* Clipping redundante */
+  border-top-right-radius: 24px;
+}
+
+.rubro:hover .rubro-img-container::after {
+  opacity: 0;
+}
+
+.rubro img {
+  width: 50%;
+  height: 90%;
+  object-fit: cover;
+  /* Mantiene proporción llenando el cuadro */
+  object-position: top center;
+  /* Prioriza la parte superior (caras/logos) */
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: block;
+  /* Clipping redundante directo en la imagen */
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+}
+
+.rubro:hover img {
+  transform: scale(1.05);
+  /* Zoom MUY sutil para que no "salga" visualmente */
+}
+
+/* Texto */
+.rubro-content {
+  padding: 30px 32px 36px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.rubro h3 {
+  color: #fff;
+  /* Título blanco */
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.5px;
+}
+
+.rubro p {
+  color: #aaa;
+  /* Texto gris claro para leer en oscuro */
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
+  font-weight: 400;
+  opacity: 0.9;
+  padding-bottom: 20px;
+  /* Espacio inferior compensatorio */
+}
+
+/* ===========================================
+   FOOTER (RESTAURADO)
+=========================================== */
+footer {
+  background: #050505;
+  color: #888;
+  text-align: center;
+  padding: 60px 0;
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+footer strong {
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.logo h1,
+.logo span {
+  color: inherit;
+}
+
+.logo img {
+  display: block;
+}
+
+.btn-whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(180deg, #25D366, #128C7E);
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .25);
+  z-index: 9999;
+  text-decoration: none;
+}
+
+.btn-whatsapp svg {
+  width: 28px;
+  height: 28px;
+  fill: #fff;
+}

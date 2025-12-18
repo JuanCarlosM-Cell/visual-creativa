@@ -1,0 +1,742 @@
+/* ===========================================
+   LA ACADEMIA - DISEÑO PREMIUM DARK
+=========================================== */
+
+/* ===== Hero con Video ===== */
+.acad-hero {
+  position: relative;
+  min-height: 100vh;
+  padding-top: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #050505;
+}
+
+.acad-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  filter: brightness(0.35) contrast(1.1);
+}
+
+/* Gradient overlay */
+.acad-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.7) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.acad-hero__overlay {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  max-width: 980px;
+  padding: 0 24px;
+}
+
+.acad-title {
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 1.1;
+  margin: 0 0 24px;
+  font-weight: 700;
+  letter-spacing: -2px;
+  color: #fff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  animation: fadeUp 0.8s ease-out forwards 0.2s;
+  opacity: 0;
+}
+
+.acad-title span {
+  color: var(--naranja);
+  font-weight: 800;
+}
+
+.acad-subtitle {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0 auto 40px;
+  max-width: 800px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  animation: fadeUp 0.8s ease-out forwards 0.4s;
+  opacity: 0;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.acad-cta {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  animation: fadeUp 0.8s ease-out forwards 0.6s;
+  opacity: 0;
+}
+
+.acad-btn {
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.acad-btn--primary {
+  background: linear-gradient(135deg, var(--naranja) 0%, var(--naranja-2) 100%);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(255, 107, 0, 0.4);
+}
+
+.acad-btn--primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(255, 107, 0, 0.5);
+}
+
+.acad-btn--ghost {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.acad-btn--ghost:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.acad-kpis {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s ease-out forwards 0.8s;
+  opacity: 0;
+}
+
+.acad-kpi {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  min-width: 130px;
+  text-align: center;
+}
+
+.acad-kpi .num {
+  display: block;
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--naranja);
+  margin-bottom: 4px;
+}
+
+.acad-kpi .lbl {
+  display: block;
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+/* ===== Contenedor Base ===== */
+.acad-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 6%;
+}
+
+/* ===== About - DARK STYLE ===== */
+.acad-about {
+  padding: 100px 0;
+  background: #0a0a0a;
+}
+
+.acad-about .acad-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px;
+  align-items: center;
+}
+
+.acad-about__text h3 {
+  font-size: 2.5rem;
+  color: #fff;
+  margin: 0 0 20px;
+  font-weight: 300;
+  letter-spacing: -1px;
+}
+
+.acad-about__text h3 span {
+  font-weight: 700;
+  color: var(--naranja);
+}
+
+.acad-about__text p {
+  color: #bbb;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  margin-bottom: 24px;
+}
+
+.acad-beneficios {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.acad-beneficios li {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid var(--naranja);
+  padding: 16px;
+  border-radius: 12px;
+  color: #bbb;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.acad-beneficios li:hover {
+  transform: translateX(5px);
+  border-left-color: var(--naranja-2);
+}
+
+.acad-link {
+  color: var(--naranja);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: color 0.3s ease;
+}
+
+.acad-link:hover {
+  color: var(--naranja-2);
+}
+
+.acad-about__media img {
+  width: 100%;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===== MVO - DARK CARDS ===== */
+.acad-mvo {
+  padding: 100px 0;
+  background: #080808;
+}
+
+.acad-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 6%;
+}
+
+.acad-card {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 40px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid var(--naranja);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.acad-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 107, 0, 0.4);
+}
+
+.acad-card__icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.acad-card h4 {
+  color: var(--naranja);
+  font-size: 1.3rem;
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+
+.acad-card p {
+  color: #bbb;
+  line-height: 1.7;
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* ===== Resultados Timeline ===== */
+.acad-resultados {
+  padding: 100px 0;
+  background: #0a0a0a;
+}
+
+.acad-resultados h3 {
+  text-align: center;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: #fff;
+  margin: 0 0 60px;
+  font-weight: 300;
+  letter-spacing: -1.5px;
+}
+
+.acad-resultados h3 span {
+  font-weight: 700;
+  color: var(--naranja);
+}
+
+.acad-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 6%;
+}
+
+.acad-step .mark {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--naranja) 0%, var(--naranja-2) 100%);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+
+.acad-step .card {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.acad-step .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.acad-step .card h5 {
+  color: #fff;
+  font-size: 1.1rem;
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+.acad-step .card p {
+  color: #bbb;
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* ===== Evidencias (Tabs) ===== */
+.acad-evidencias {
+  padding: 120px 0;
+  background: #080808;
+}
+
+.acad-evidencias h3 {
+  text-align: center;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: #fff;
+  margin: 0 0 40px;
+  font-weight: 300;
+  letter-spacing: -1.5px;
+}
+
+.acad-evidencias h3 span {
+  font-weight: 700;
+  color: var(--naranja);
+}
+
+.acad-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.acad-tab {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  padding: 14px 32px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: #bbb;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.acad-tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.acad-tab.is-active {
+  background: linear-gradient(135deg, var(--naranja) 0%, var(--naranja-2) 100%);
+  border-color: var(--naranja);
+  color: #fff;
+}
+
+.acad-panel[hidden] {
+  display: none;
+}
+
+.acad-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 6%;
+}
+
+.acad-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.acad-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+.acad-grid--videos .acad-video {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.acad-video video {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+
+.acad-video figcaption {
+  font-size: 0.9rem;
+  color: #bbb;
+  margin-top: 12px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ===== Programa ===== */
+.acad-programa {
+  padding: 100px 0;
+  background: #0a0a0a;
+}
+
+.acad-programa h3 {
+  text-align: center;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: #fff;
+  margin: 0 0 60px;
+  font-weight: 300;
+  letter-spacing: -1.5px;
+}
+
+.acad-programa h3 span {
+  font-weight: 700;
+  color: var(--naranja);
+}
+
+.acad-curriculum {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  padding: 0 6%;
+}
+
+.acad-mod {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 32px 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.acad-mod:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.acad-mod h5 {
+  margin: 0 0 16px;
+  color: var(--naranja);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.acad-mod ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #bbb;
+  line-height: 1.8;
+}
+
+.acad-mod li {
+  margin-bottom: 8px;
+}
+
+.acad-modalidades {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 6%;
+}
+
+.acad-tag {
+  background: rgba(255, 107, 0, 0.1);
+  color: var(--naranja);
+  border: 2px solid rgba(255, 107, 0, 0.3);
+  border-radius: 50px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* ===== Fechas ===== */
+.acad-fechas {
+  padding: 100px 0;
+  background: #080808;
+}
+
+.acad-fechas h3 {
+  text-align: center;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: #fff;
+  margin: 0 0 60px;
+  font-weight: 300;
+  letter-spacing: -1.5px;
+}
+
+.acad-fechas h3 span {
+  font-weight: 700;
+  color: var(--naranja);
+}
+
+.acad-fechas__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 6%;
+}
+
+.acad-fecha {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 50px 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.acad-fecha:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.acad-fecha h5 {
+  margin: 0 0 8px;
+  color: var(--naranja);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.acad-fecha p {
+  color: #bbb;
+  margin: 0;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.acad-fecha strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.acad-fecha .acad-btn {
+  margin-top: 24px;
+  width: 100%;
+}
+
+/* ===== Equipo Docente ===== */
+.acad-equipo {
+  padding: 100px 0;
+  background: #0a0a0a;
+}
+
+.acad-equipo h3 {
+  text-align: center;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: #fff;
+  margin: 0 0 60px;
+  font-weight: 300;
+  letter-spacing: -1.5px;
+}
+
+.acad-equipo h3 span {
+  font-weight: 700;
+  color: var(--naranja);
+}
+
+.acad-equipo__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
+  gap: 30px;
+  justify-content: center;
+  padding: 0 6%;
+}
+
+.acad-prof {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.acad-prof:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+.acad-prof img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 20px;
+  border: 4px solid var(--naranja);
+  box-shadow: 0 10px 30px rgba(255, 107, 0, 0.3);
+}
+
+.acad-prof h6 {
+  font-size: 1.3rem;
+  color: #fff;
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+
+.acad-prof p {
+  margin: 0;
+  color: #bbb;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+/* ===== Footer ===== */
+footer {
+  padding: 60px 6%;
+  background: #050505;
+  color: #888;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin: 0;
+}
+
+footer p {
+  margin: 0;
+}
+
+footer strong {
+  color: #fff;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .acad-about .acad-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .acad-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .acad-beneficios {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+
+  .acad-cards,
+  .acad-curriculum,
+  .acad-fechas__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .acad-cta {
+    flex-direction: column;
+  }
+
+  .acad-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}

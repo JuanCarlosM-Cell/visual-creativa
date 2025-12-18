@@ -1,0 +1,19 @@
+# robots.txt para Visual Creativa
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://visualcreativa.pe/sitemap.xml
+
+# Disallow admin areas (si existen)
+Disallow: /admin/
+Disallow: /private/
+
+# Allow all CSS and JS
+Allow: /css/
+Allow: /js/
+Allow: /img/
+
+# Crawl-delay (opcional, para evitar sobrecarga)
+Crawl-delay: 1

@@ -1,0 +1,511 @@
+/* ===========================================
+   CHINCHA TV - DISEÑO PREMIUM DARK
+=========================================== */
+
+/* ===== Banner Chincha TV ===== */
+.banner-ctv {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--header-h);
+  overflow: hidden;
+  background-color: #050505;
+}
+
+.video-fondo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  filter: brightness(0.35) contrast(1.1);
+}
+
+/* Gradient overlay */
+.banner-ctv::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.7) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.banner-inner {
+  position: relative;
+  z-index: 2;
+  width: min(1200px, 94%);
+  text-align: center;
+  color: #fff;
+}
+
+.banner-text {
+  max-width: 900px;
+  margin: 0 auto 40px;
+}
+
+.titulo-animado {
+  font-size: clamp(3rem, 7vw, 5rem);
+  margin: 0 0 20px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  color: #fff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  animation: fadeUp 0.8s ease-out forwards 0.2s;
+  opacity: 0;
+}
+
+.titulo-animado span {
+  color: var(--naranja);
+  font-weight: 800;
+}
+
+.tagline {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 40px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  animation: fadeUp 0.8s ease-out forwards 0.4s;
+  opacity: 0;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.banner-cta {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s ease-out forwards 0.6s;
+  opacity: 0;
+}
+
+.btn-ghost {
+  padding: 16px 36px;
+  border-radius: 50px;
+  color: #fff;
+  text-decoration: none;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn-ghost:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+}
+
+.btn-solid {
+  padding: 16px 36px;
+  border-radius: 50px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--naranja) 0%, var(--naranja-2) 100%);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 10px 30px rgba(255, 107, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-solid:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(255, 107, 0, 0.5);
+}
+
+/* ===== Detalle CTV - DARK STYLE ===== */
+.detalle-ctv {
+  padding: 100px 6%;
+  background: #0a0a0a;
+  position: relative;
+}
+
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.card-descripcion {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 50px 40px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid var(--naranja);
+  line-height: 1.8;
+  color: #bbb;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card-descripcion:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 107, 0, 0.4);
+}
+
+.card-descripcion h3 {
+  color: var(--naranja);
+  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.card-descripcion p {
+  margin-bottom: 16px;
+  font-size: 1.05rem;
+}
+
+.card-descripcion strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ===== Impacto CTV - Estadísticas ===== */
+.impacto-ctv {
+  padding: 80px 6%;
+  background: #080808;
+  color: #fff;
+}
+
+.impacto-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+.impacto-card {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.impacto-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--naranja);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.impacto-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 107, 0, 0.4);
+}
+
+.impacto-card:hover::before {
+  transform: scaleX(1);
+}
+
+.impacto-card .numero {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--naranja);
+  text-shadow: 0 0 30px rgba(255, 107, 0, 0.5);
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.impacto-card .meta {
+  color: #bbb;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* ===== Videos CTV - DARK GALLERY ===== */
+.videos-ctv {
+  padding: 120px 6%;
+  background: #0a0a0a;
+}
+
+.wrap-videos {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.videos-ctv h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: #fff;
+  margin: 0 0 20px;
+  font-weight: 300;
+  letter-spacing: -1.5px;
+}
+
+.videos-ctv .sub {
+  color: #bbb;
+  font-size: 1.2rem;
+  margin-bottom: 60px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.grid-videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.video-frame {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.video-frame:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 107, 0, 0.4);
+}
+
+.video-wrap {
+  position: relative;
+  padding-top: 56.25%;
+  height: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-frame h4 {
+  padding: 20px;
+  font-size: 1.05rem;
+  color: #fff;
+  background: rgba(20, 20, 20, 0.8);
+  margin: 0;
+  font-weight: 600;
+}
+
+.video-extra {
+  display: none;
+}
+
+.video-extra.mostrar {
+  display: block;
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.center {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.btn-outline {
+  padding: 16px 40px;
+  border-radius: 50px;
+  background: transparent;
+  border: 2px solid var(--naranja);
+  color: var(--naranja);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 107, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(255, 107, 0, 0.3);
+}
+
+/* ===== Equipo/Compromiso CTV ===== */
+.equipo-ctv {
+  padding: 100px 6%;
+  background: #080808;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de fondo sutil */
+.equipo-ctv::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255, 107, 0, 0.05) 0%, transparent 50%);
+  z-index: 0;
+  animation: bgRotate 30s linear infinite;
+}
+
+@keyframes bgRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.equipo-ctv .wrap {
+  position: relative;
+  z-index: 2;
+}
+
+.equipo-ctv h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 30px;
+  font-weight: 300;
+  letter-spacing: -1.5px;
+}
+
+.equipo-ctv p {
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.8;
+  font-size: 1.15rem;
+  color: #bbb;
+}
+
+.equipo-ctv strong {
+  color: var(--naranja);
+  font-weight: 700;
+}
+
+/* ===== Footer ===== */
+.footer-ctv {
+  padding: 60px 6%;
+  background: #050505;
+  color: #888;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin: 0;
+}
+
+.footer-ctv p {
+  margin: 0;
+}
+
+.footer-ctv strong {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .banner-ctv {
+    min-height: 80vh;
+  }
+
+  .detalle-ctv,
+  .videos-ctv,
+  .equipo-ctv {
+    padding: 80px 6%;
+  }
+
+  .impacto-ctv {
+    padding: 60px 6%;
+  }
+
+  .card-descripcion {
+    padding: 40px 30px;
+  }
+
+  .impacto-wrap {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+  }
+
+  .grid-videos {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .banner-cta {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .btn-ghost,
+  .btn-solid {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .card-descripcion {
+    padding: 32px 24px;
+  }
+
+  .impacto-card {
+    padding: 32px 24px;
+  }
+
+  .impacto-card .numero {
+    font-size: 3rem;
+  }
+
+  .grid-videos {
+    grid-template-columns: 1fr;
+  }
+}

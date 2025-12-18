@@ -1,0 +1,57 @@
+<!-- FORMULARIO DE CONTACTO MEJORADO -->
+<!-- Insertar este código en contacto.html reemplazando la sección "frase-contacto" (líneas 89-92) -->
+
+<div class="formulario-contacto" data-aos="fade-left">
+    <h3>Envíanos un Mensaje</h3>
+
+    <div class="form-success">
+        <strong>¡Mensaje enviado exitosamente!</strong><br>
+        Nos pondremos en contacto contigo pronto.
+    </div>
+
+    <form data-validate>
+        <div class="form-group">
+            <label for="nombre">Nombre Completo *</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+            <span class="form-error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Correo Electrónico *</label>
+            <input type="email" id="email" name="email" required placeholder="tu@email.com">
+            <span class="form-error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="telefono">Teléfono *</label>
+            <input type="tel" id="telefono" name="telefono" required placeholder="999 999 999">
+            <span class="form-error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="servicio">Servicio de Interés</label>
+            <select id="servicio" name="servicio">
+                <option value="">Selecciona un servicio</option>
+                <option value="chincha-tv">Chincha TV - Publicidad</option>
+                <option value="la-academia">La Academia - Talleres</option>
+                <option value="mundo-bebe">Mundo Bebé</option>
+                <option value="tu-detalle">Tu Detalle</option>
+                <option value="redes-sociales">Gestión de Redes Sociales</option>
+                <option value="merchandising">Merchandising</option>
+                <option value="produccion">Producción Audiovisual</option>
+                <option value="otro">Otro</option>
+            </select>
+            <span class="form-error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="mensaje">Mensaje *</label>
+            <textarea id="mensaje" name="mensaje" required placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+            <span class="form-error"></span>
+        </div>
+
+        <button type="submit" class="btn-submit">
+            Enviar Mensaje
+        </button>
+    </form>
+</div>

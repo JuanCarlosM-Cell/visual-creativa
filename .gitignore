@@ -1,0 +1,15 @@
+# System Files
+Thumbs.db
+.DS_Store
+
+# Node modules (if any)
+node_modules/
+npm-debug.log
+
+# Vercel
+.vercel
+
+# Editor directories
+.idea/
+.vscode/
+*.swp

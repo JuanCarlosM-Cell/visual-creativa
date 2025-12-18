@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary Meta Tags -->
+    <title>Error 404 - Página No Encontrada | Visual Creativa</title>
+    <meta name="title" content="Error 404 - Página No Encontrada | Visual Creativa" />
+    <meta name="description" content="La página que buscas no existe. Vuelve al inicio de Visual Creativa." />
+    <meta name="robots" content="noindex, follow" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+    <meta name="theme-color" content="#ff6b00" />
+
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        .error-404 {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .error-404::before {
+            content: "404";
+            position: absolute;
+            font-size: clamp(15rem, 30vw, 25rem);
+            font-weight: 900;
+            color: rgba(255, 107, 0, 0.05);
+            z-index: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            line-height: 1;
+        }
+
+        .error-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .error-404 h1 {
+            font-size: clamp(4rem, 10vw, 8rem);
+            color: var(--naranja);
+            margin: 0 0 20px 0;
+            font-weight: 800;
+            text-shadow: 0 0 30px rgba(255, 107, 0, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .error-404 h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #fff;
+            margin: 0 0 15px 0;
+            font-weight: 600;
+        }
+
+        .error-404 p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #aaa;
+            margin: 0 0 40px 0;
+            line-height: 1.6;
+        }
+
+        .error-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-404 {
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary-404 {
+            background: var(--naranja);
+            color: #fff;
+            border: 2px solid var(--naranja);
+        }
+
+        .btn-primary-404:hover {
+            background: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.3);
+        }
+
+        .btn-secondary-404 {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary-404:hover {
+            border-color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 107, 0, 0.1);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-30px) rotate(180deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-404">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+
+        <div class="error-content">
+            <h1>404</h1>
+            <h2>¡Oops! Página no encontrada</h2>
+            <p>
+                Lo sentimos, la página que buscas no existe o ha sido movida.
+                Pero no te preocupes, podemos ayudarte a encontrar lo que necesitas.
+            </p>
+
+            <div class="error-buttons">
+                <a href="index.html" class="btn-404 btn-primary-404">Volver al Inicio</a>
+                <a href="contacto.html" class="btn-404 btn-secondary-404">Contáctanos</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

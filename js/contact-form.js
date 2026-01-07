@@ -116,6 +116,37 @@ async function handleFormSubmit(e) {
     } catch (error) {
         console.error('Error al enviar formulario:', error);
 
+        // Si EmailJS no está configurado, ofrecer alternativa de WhatsApp
+        if (EMAILJS_CONFIG.PUBLIC_KEY === 'TU_PUBLIC_KEY_AQUI' ||
+            EMAILJS_CONFIG.SERVICE_ID === 'TU_SERVICE_ID_AQUI') {
+
+            // Preparar mensaje para WhatsApp
+            const whatsappMsg = `Hola! Me gustaría contactar con Visual Creativa.%0A%0A` +
+                `*Nombre:* ${form.nombre.value.trim()}%0A` +
+                `*Email:* ${form.email.value.trim()}%0A` +
+                `*Teléfono:* ${form.telefono.value.trim()}%0A` +
+                `*Servicio:* ${form.servicio.value || 'No especificado'}%0A` +
+                `*Mensaje:* ${form.mensaje.value.trim()}`;
+
+            const whatsappNumber = '51985354696'; // Número de WhatsApp de Visual Creativa
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMsg}`;
+
+            // Mostrar mensaje con opción de WhatsApp
+            const errorMessage = `El formulario de contacto está en configuración. ` +
+                `¿Deseas enviar tu mensaje por WhatsApp en su lugar?`;
+
+            if (confirm(errorMessage)) {
+                window.open(whatsappUrl, '_blank');
+                form.reset();
+                showMessage(successMsg, '¡Gracias! Te hemos redirigido a WhatsApp para completar tu mensaje.');
+                setTimeout(() => hideMessage(successMsg), 5000);
+            } else {
+                showMessage(errorMsg, 'Por favor, contáctanos directamente por WhatsApp al +51 985 354 696');
+            }
+
+            return;
+        }
+
         let errorMessage = 'Hubo un error al enviar el mensaje. ';
 
         if (error.text) {

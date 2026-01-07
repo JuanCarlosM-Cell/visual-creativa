@@ -1,61 +1,92 @@
+/**
+ * VISUAL CREATIVA - MAIN SCRIPT (OPTIMIZED)
+ * Performance optimizations applied:
+ * - Debouncing for scroll events
+ * - Passive event listeners
+ * - RequestAnimationFrame for animations
+ * - Reduced DOM queries
+ */
+
+// Utilidades de rendimiento
+const debounce = (func, wait) => {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+
+const throttle = (func, limit) => {
+  let inThrottle;
+  return function (...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+};
+
+// Inicialización cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initVideoModals();
   initScrollToTop();
-  initFormValidation();
   initLazyLoading();
   initSmoothScroll();
+  initHeaderScroll();
+
+  // Preload crítico
+  preloadCriticalResources();
 });
 
 /* ===========================================
-   MENÚ MÓVIL
+   MENÚ MÓVIL (OPTIMIZADO)
 =========================================== */
 function initMobileMenu() {
   const toggle = document.querySelector('.nav-toggle');
   const nav = document.querySelector('nav');
 
-  if (toggle && nav) {
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('nav-open');
-      const isOpen = document.body.classList.contains('nav-open');
-      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      
-      // Prevenir scroll cuando el menú está abierto
-      if (isOpen) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
-      }
-    });
+  if (!toggle || !nav) return;
 
-    // Cerrar al hacer click en un enlace
-    nav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.body.classList.remove('nav-open');
-        toggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
-    });
+  const toggleMenu = () => {
+    const isOpen = document.body.classList.toggle('nav-open');
+    toggle.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  };
 
-    // Cerrar con tecla Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
-        document.body.classList.remove('nav-open');
-        toggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      }
-    });
-  }
+  const closeMenu = () => {
+    document.body.classList.remove('nav-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  };
+
+  toggle.addEventListener('click', toggleMenu);
+
+  // Cerrar al hacer click en un enlace
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Cerrar con tecla Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+      closeMenu();
+    }
+  });
 }
 
 /* ===========================================
-   MODAL DE VIDEO (Global)
+   MODAL DE VIDEO (OPTIMIZADO)
 =========================================== */
 function initVideoModals() {
   const videoCards = document.querySelectorAll('.video-card');
   const modal = document.getElementById('modalVideo');
 
-  // Si no hay modal o tarjetas, salimos
   if (!modal || videoCards.length === 0) return;
 
   const iframe = document.getElementById('videoFrame');
@@ -63,14 +94,16 @@ function initVideoModals() {
 
   const openVideo = (videoId) => {
     if (!iframe) return;
-    // Autoplay activado
     iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
     modal.style.display = 'flex';
     modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden'; // Evitar scroll de fondo
-    
-    // Focus trap
-    iframe.focus();
+    document.body.style.overflow = 'hidden';
+
+    // Focus management
+    requestAnimationFrame(() => {
+      const closeButton = modal.querySelector('.cerrar');
+      if (closeButton) closeButton.focus();
+    });
   };
 
   const closeVideo = () => {
@@ -92,24 +125,21 @@ function initVideoModals() {
     closeBtn.addEventListener('click', closeVideo);
   }
 
-  // Cerrar al hacer click fuera del contenido
   modal.addEventListener('click', (e) => {
     if (e.target === modal) closeVideo();
   });
 
-  // Cerrar con Escape
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.style.display === 'flex') closeVideo();
   });
 }
 
 /* ===========================================
-   SCROLL TO TOP BUTTON
+   SCROLL TO TOP BUTTON (OPTIMIZADO)
 =========================================== */
 function initScrollToTop() {
-  // Crear botón si no existe
   let scrollBtn = document.querySelector('.scroll-to-top');
-  
+
   if (!scrollBtn) {
     scrollBtn = document.createElement('button');
     scrollBtn.className = 'scroll-to-top';
@@ -122,19 +152,15 @@ function initScrollToTop() {
     document.body.appendChild(scrollBtn);
   }
 
-  // Mostrar/ocultar según scroll
-  const toggleScrollBtn = () => {
-    if (window.scrollY > 300) {
-      scrollBtn.classList.add('visible');
-    } else {
-      scrollBtn.classList.remove('visible');
-    }
-  };
+  // Throttled scroll handler para mejor performance
+  const toggleScrollBtn = throttle(() => {
+    const shouldShow = window.scrollY > 300;
+    scrollBtn.classList.toggle('visible', shouldShow);
+  }, 100);
 
-  window.addEventListener('scroll', toggleScrollBtn);
+  window.addEventListener('scroll', toggleScrollBtn, { passive: true });
   toggleScrollBtn(); // Check inicial
 
-  // Scroll suave al hacer click
   scrollBtn.addEventListener('click', () => {
     window.scrollTo({
       top: 0,
@@ -144,119 +170,29 @@ function initScrollToTop() {
 }
 
 /* ===========================================
-   VALIDACIÓN DE FORMULARIOS
-=========================================== */
-function initFormValidation() {
-  const forms = document.querySelectorAll('form[data-validate]');
-  
-  forms.forEach(form => {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      // Limpiar errores previos
-      form.querySelectorAll('.form-group').forEach(group => {
-        group.classList.remove('error');
-      });
-
-      let isValid = true;
-
-      // Validar campos requeridos
-      const requiredFields = form.querySelectorAll('[required]');
-      requiredFields.forEach(field => {
-        const group = field.closest('.form-group');
-        
-        if (!field.value.trim()) {
-          group.classList.add('error');
-          const errorMsg = group.querySelector('.form-error');
-          if (errorMsg) errorMsg.textContent = 'Este campo es obligatorio';
-          isValid = false;
-        }
-      });
-
-      // Validar email
-      const emailField = form.querySelector('input[type="email"]');
-      if (emailField && emailField.value) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(emailField.value)) {
-          const group = emailField.closest('.form-group');
-          group.classList.add('error');
-          const errorMsg = group.querySelector('.form-error');
-          if (errorMsg) errorMsg.textContent = 'Email inválido';
-          isValid = false;
-        }
-      }
-
-      // Validar teléfono
-      const phoneField = form.querySelector('input[type="tel"]');
-      if (phoneField && phoneField.value) {
-        const phoneRegex = /^[0-9]{9,}$/;
-        if (!phoneRegex.test(phoneField.value.replace(/\s/g, ''))) {
-          const group = phoneField.closest('.form-group');
-          group.classList.add('error');
-          const errorMsg = group.querySelector('.form-error');
-          if (errorMsg) errorMsg.textContent = 'Teléfono inválido (mínimo 9 dígitos)';
-          isValid = false;
-        }
-      }
-
-      if (isValid) {
-        // Deshabilitar botón de envío
-        const submitBtn = form.querySelector('button[type="submit"]');
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.innerHTML = '<span class="loading-spinner"></span> Enviando...';
-        }
-
-        // Aquí iría la lógica de envío real (AJAX, fetch, etc.)
-        // Por ahora simulamos un envío exitoso
-        setTimeout(() => {
-          const successMsg = form.querySelector('.form-success');
-          if (successMsg) {
-            successMsg.classList.add('show');
-            form.reset();
-          }
-          
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = 'Enviar Mensaje';
-          }
-
-          // Ocultar mensaje después de 5 segundos
-          setTimeout(() => {
-            if (successMsg) successMsg.classList.remove('show');
-          }, 5000);
-        }, 1500);
-      }
-    });
-
-    // Limpiar error al escribir
-    form.querySelectorAll('input, textarea, select').forEach(field => {
-      field.addEventListener('input', () => {
-        const group = field.closest('.form-group');
-        if (group) group.classList.remove('error');
-      });
-    });
-  });
-}
-
-/* ===========================================
-   LAZY LOADING DE IMÁGENES
+   LAZY LOADING DE IMÁGENES (MEJORADO)
 =========================================== */
 function initLazyLoading() {
   const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-  
+
   if ('IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const img = entry.target;
-          
-          // Si tiene data-src, usarlo (para imágenes que aún no se han cargado)
+
+          // Si tiene data-src, usarlo
           if (img.dataset.src) {
             img.src = img.dataset.src;
             delete img.dataset.src;
           }
-          
+
+          // Si tiene srcset
+          if (img.dataset.srcset) {
+            img.srcset = img.dataset.srcset;
+            delete img.dataset.srcset;
+          }
+
           img.classList.add('loaded');
           observer.unobserve(img);
         }
@@ -274,6 +210,10 @@ function initLazyLoading() {
         img.src = img.dataset.src;
         delete img.dataset.src;
       }
+      if (img.dataset.srcset) {
+        img.srcset = img.dataset.srcset;
+        delete img.dataset.srcset;
+      }
     });
   }
 }
@@ -285,10 +225,9 @@ function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
-      
-      // Ignorar # solo
+
       if (href === '#') return;
-      
+
       const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
@@ -306,11 +245,44 @@ function initSmoothScroll() {
 }
 
 /* ===========================================
+   HEADER SCROLL EFFECT (NUEVO)
+=========================================== */
+function initHeaderScroll() {
+  const header = document.querySelector('.encabezado');
+  if (!header) return;
+
+  const handleScroll = throttle(() => {
+    const scrolled = window.scrollY > 50;
+    header.classList.toggle('scrolled', scrolled);
+  }, 100);
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+}
+
+/* ===========================================
+   PRELOAD DE RECURSOS CRÍTICOS
+=========================================== */
+function preloadCriticalResources() {
+  // Preload de imágenes críticas al hover
+  const cards = document.querySelectorAll('.rubro, .video-card');
+
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', function () {
+      const img = this.querySelector('img[data-src]');
+      if (img && img.dataset.src) {
+        const tempImg = new Image();
+        tempImg.src = img.dataset.src;
+      }
+    }, { once: true, passive: true });
+  });
+}
+
+/* ===========================================
    PERFORMANCE: Preload de videos al hover
 =========================================== */
 document.addEventListener('DOMContentLoaded', () => {
   const videoCards = document.querySelectorAll('.video-card');
-  
+
   videoCards.forEach(card => {
     card.addEventListener('mouseenter', () => {
       const videoId = card.getAttribute('data-video');
@@ -319,6 +291,75 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = new Image();
         img.src = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
       }
-    }, { once: true });
+    }, { once: true, passive: true });
   });
+});
+
+/* ===========================================
+   OPTIMIZACIÓN DE ANIMACIONES
+=========================================== */
+// Pausar animaciones cuando la pestaña no está visible
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    // Pausar animaciones CSS
+    document.body.classList.add('animations-paused');
+  } else {
+    document.body.classList.remove('animations-paused');
+  }
+});
+
+/* ===========================================
+   DETECCIÓN DE CONEXIÓN LENTA
+=========================================== */
+if ('connection' in navigator) {
+  const connection = navigator.connection;
+
+  if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+    // Deshabilitar animaciones pesadas en conexiones lentas
+    document.body.classList.add('slow-connection');
+
+    // Deshabilitar AOS en conexiones lentas
+    if (typeof AOS !== 'undefined') {
+      AOS.init({ disable: true });
+    }
+  }
+}
+
+/* ===========================================
+   ERROR HANDLING GLOBAL
+=========================================== */
+window.addEventListener('error', (e) => {
+  console.error('Error capturado:', e.error);
+
+  // Aquí podrías enviar errores a un servicio de tracking
+  // Por ejemplo: Sentry, LogRocket, etc.
+});
+
+/* ===========================================
+   UTILIDAD: Intersection Observer para animaciones
+=========================================== */
+function observeElements(selector, callback, options = {}) {
+  const elements = document.querySelectorAll(selector);
+
+  if (!elements.length || !('IntersectionObserver' in window)) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        callback(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px',
+    ...options
+  });
+
+  elements.forEach(el => observer.observe(el));
+}
+
+// Ejemplo de uso para animaciones custom
+observeElements('.fade-in-up', (element) => {
+  element.classList.add('animated');
 });

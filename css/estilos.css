@@ -21,9 +21,29 @@
   }
 }
 
+/* Tablet breakpoint */
+@media (max-width: 1024px) and (min-width: 769px) {
+  :root {
+    --rubro-img-height: 160px;
+  }
+
+  .contenedor-rubros {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+}
+
 @media (max-width: 480px) {
   :root {
     --rubro-img-height: 130px;
+  }
+}
+
+/* Extra small mobile */
+@media (max-width: 375px) {
+  :root {
+    --header-h: 60px;
+    --rubro-img-height: 120px;
   }
 }
 
@@ -72,6 +92,8 @@ body {
 @media (max-width: 900px) {
   .encabezado {
     padding: 10px 20px;
+    overflow: visible;
+    /* Permitir que el menú se muestre fuera del header */
   }
 }
 
@@ -149,11 +171,13 @@ nav a.activo::after {
   cursor: pointer;
   width: 48px;
   height: 48px;
-  position: absolute;
+  position: fixed;
+  /* Cambio de absolute a fixed para mejor control */
   right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2000;
+  top: 20px;
+  /* Posición fija desde arriba */
+  z-index: 10001;
+  /* Incrementado para estar siempre encima del overlay */
   padding: 0;
   border-radius: 50%;
   transition: background-color 0.3s ease;
@@ -196,35 +220,37 @@ body.nav-open .nav-toggle span:nth-child(3) {
 /* NAV MÓVIL (Glassmorphism) */
 @media (max-width: 900px) {
   nav ul {
-    display: none;
+    display: none !important;
+    /* Forzar ocultar por defecto */
   }
 
   .nav-toggle {
     display: block;
   }
 
-  /* Overlay del menú */
+  /* Overlay del menú - CORREGIDO CON FONDO SÓLIDO */
   body.nav-open nav ul {
-    display: flex;
+    display: flex !important;
+    /* Forzar mostrar cuando está abierto */
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: rgba(10, 10, 10, 0.95);
-    /* Muy oscuro, casi sólido */
-    backdrop-filter: blur(15px);
-    /* Efecto vidrio borroso */
-    -webkit-backdrop-filter: blur(15px);
+    background: #0a0a0a;
+    /* Fondo SÓLIDO oscuro */
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    /* Gradiente sutil */
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    /* Pantalla completa */
+    width: 100vw;
     height: 100vh;
     padding: 0;
     margin: 0;
-    z-index: 1500;
-    animation: fadeInMenu 0.4s ease forwards;
+    z-index: 10000;
+    /* Z-index debajo del botón hamburguesa (10001) */
+    animation: fadeInMenu 0.3s ease forwards;
   }
 
   @keyframes fadeInMenu {
@@ -239,26 +265,27 @@ body.nav-open .nav-toggle span:nth-child(3) {
     }
   }
 
-  nav ul li {
-    margin: 15px 0;
+  body.nav-open nav ul li {
+    margin: 20px 0;
     opacity: 0;
-    animation: slideInLi 0.4s ease forwards;
+    animation: slideInLi 0.5s ease forwards;
+    list-style: none;
   }
 
   /* Retraso en cascada para items */
-  nav ul li:nth-child(1) {
+  body.nav-open nav ul li:nth-child(1) {
     animation-delay: 0.1s;
   }
 
-  nav ul li:nth-child(2) {
+  body.nav-open nav ul li:nth-child(2) {
     animation-delay: 0.2s;
   }
 
-  nav ul li:nth-child(3) {
+  body.nav-open nav ul li:nth-child(3) {
     animation-delay: 0.3s;
   }
 
-  nav ul li:nth-child(4) {
+  body.nav-open nav ul li:nth-child(4) {
     animation-delay: 0.4s;
   }
 
@@ -275,9 +302,20 @@ body.nav-open .nav-toggle span:nth-child(3) {
   }
 
   nav a {
-    font-size: 1.5em;
-    /* Texto grande en móvil */
+    font-size: 1.8em;
+    /* Texto más grande en móvil */
     font-weight: 600;
+    color: #fff;
+    /* Asegurar que sea blanco */
+    padding: 12px 24px;
+    display: block;
+    text-align: center;
+  }
+
+  nav a:hover,
+  nav a.activo {
+    color: var(--naranja);
+    transform: scale(1.05);
   }
 }
 
@@ -490,11 +528,25 @@ body.nav-open .nav-toggle span:nth-child(3) {
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  /* Tarjetas más angostas (chicas) */
   gap: 30px;
-  /* Gap reducido también */
   position: relative;
   z-index: 2;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 768px) {
+  .contenedor-rubros {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contenedor-rubros {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    max-width: 500px;
+  }
 }
 
 /* ===========================================
@@ -687,10 +739,49 @@ footer strong {
   box-shadow: 0 10px 24px rgba(0, 0, 0, .25);
   z-index: 9999;
   text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-whatsapp:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
+}
+
+.btn-whatsapp:active {
+  transform: scale(0.95);
 }
 
 .btn-whatsapp svg {
   width: 28px;
   height: 28px;
   fill: #fff;
+}
+
+/* Responsive WhatsApp button */
+@media (max-width: 768px) {
+  .btn-whatsapp {
+    width: 52px;
+    height: 52px;
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .btn-whatsapp svg {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-whatsapp {
+    width: 48px;
+    height: 48px;
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .btn-whatsapp svg {
+    width: 24px;
+    height: 24px;
+  }
 }

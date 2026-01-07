@@ -86,9 +86,66 @@
           </div>
         </div>
 
-        <div class="frase-contacto" data-aos="fade-left">
-          <h3>“Creamos conexiones visuales que inspiran.”</h3>
-          <p>En Visual Creativa transformamos tus ideas en experiencias que comunican, emocionan y permanecen.</p>
+        <div class="formulario-contacto" data-aos="fade-left">
+          <h3>Envíanos un Mensaje</h3>
+
+          <!-- Mensaje de éxito -->
+          <div id="form-success" class="form-success">
+            <strong>¡Mensaje enviado exitosamente!</strong><br>
+            Nos pondremos en contacto contigo pronto.
+          </div>
+
+          <!-- Mensaje de error -->
+          <div id="form-error" class="form-error-message">
+            <!-- Se llenará dinámicamente -->
+          </div>
+
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="nombre">Nombre Completo *</label>
+              <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+              <span class="form-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Correo Electrónico *</label>
+              <input type="email" id="email" name="email" required placeholder="tu@email.com">
+              <span class="form-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="telefono">Teléfono *</label>
+              <input type="tel" id="telefono" name="telefono" required placeholder="999 999 999">
+              <span class="form-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="servicio">Servicio de Interés</label>
+              <select id="servicio" name="servicio">
+                <option value="">Selecciona un servicio</option>
+                <option value="chincha-tv">Chincha TV - Publicidad</option>
+                <option value="la-academia">La Academia - Talleres</option>
+                <option value="mundo-bebe">Mundo Bebé</option>
+                <option value="tu-detalle">Tu Detalle</option>
+                <option value="redes-sociales">Gestión de Redes Sociales</option>
+                <option value="merchandising">Merchandising</option>
+                <option value="produccion">Producción Audiovisual</option>
+                <option value="otro">Otro</option>
+              </select>
+              <span class="form-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="mensaje">Mensaje *</label>
+              <textarea id="mensaje" name="mensaje" required placeholder="Cuéntanos sobre tu proyecto..."
+                rows="5"></textarea>
+              <span class="form-error"></span>
+            </div>
+
+            <button type="submit" class="btn-submit">
+              Enviar Mensaje
+            </button>
+          </form>
         </div>
       </div>
     </div>
@@ -114,8 +171,12 @@
     <p>© 2025 <strong>Visual Creativa</strong> — Comunicación & Producción</p>
   </footer>
 
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="js/script.js"></script>
+  <script src="js/contact-form.js"></script>
   <script>
     AOS.init({ duration: 1000, once: true });
   </script>

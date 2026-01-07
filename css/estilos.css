@@ -87,6 +87,17 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+/* Prevenir overflow en todas las secciones */
+section,
+main,
+article,
+aside,
+footer {
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
 /* ===========================================
    HEADER (Unificado para TODAS las páginas)
 =========================================== */

@@ -126,6 +126,9 @@ body::-webkit-scrollbar {
 .encabezado .logo {
   display: flex;
   align-items: center;
+  overflow: hidden;
+  /* Prevenir que el logo cause overflow */
+  max-width: fit-content;
 }
 
 .encabezado .logo img {
@@ -133,6 +136,8 @@ body::-webkit-scrollbar {
   transform: scale(1.35);
   position: relative;
   left: -22px;
+  max-width: 100%;
+  /* Prevenir overflow del logo */
 }
 
 .encabezado .logo h1 {

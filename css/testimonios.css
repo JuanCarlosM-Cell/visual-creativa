@@ -44,22 +44,29 @@
     margin: 0 auto;
     position: relative;
     z-index: 2;
-    overflow: hidden;
-    padding: 0 60px;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 400px;
+    /* Asegurar espacio para las tarjetas */
 }
 
 .testimonios-track {
     display: flex;
     transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
+    width: 100%;
 }
 
 /* Tarjeta de Testimonio */
 .testimonio-card {
-    min-width: 100%;
+    width: 100%;
     flex-shrink: 0;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     box-sizing: border-box;
+    padding: 0 60px;
+    /* Espacio para los botones de navegación */
 }
 
 .testimonio-content {
@@ -72,8 +79,9 @@
     position: relative;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    width: 100%;
     max-width: 100%;
-    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 /* Borde superior animado */
@@ -245,7 +253,7 @@
         padding: 100px 6% 80px;
     }
 
-    .testimonios-carousel {
+    .testimonio-card {
         padding: 0 50px;
     }
 
@@ -273,7 +281,7 @@
         margin-bottom: 60px;
     }
 
-    .testimonios-carousel {
+    .testimonio-card {
         padding: 0 40px;
     }
 

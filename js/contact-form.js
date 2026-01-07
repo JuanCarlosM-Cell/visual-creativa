@@ -10,9 +10,9 @@
 
 // ⚠️ IMPORTANTE: Reemplazar con tus credenciales de EmailJS
 const EMAILJS_CONFIG = {
-    PUBLIC_KEY: 'TU_PUBLIC_KEY_AQUI', // Obtener de EmailJS Dashboard
-    SERVICE_ID: 'TU_SERVICE_ID_AQUI', // ID del servicio de email
-    TEMPLATE_ID: 'TU_TEMPLATE_ID_AQUI' // ID de la plantilla
+    PUBLIC_KEY: 'Yj9xSkffvYoPee4v9',
+    SERVICE_ID: 'aatgliuomefqvfri',
+    TEMPLATE_ID: 'template_yplrzzj'
 };
 
 // Inicializar EmailJS cuando el DOM esté listo

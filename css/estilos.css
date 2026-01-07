@@ -55,6 +55,16 @@ html {
   overflow-x: hidden;
   /* Prevenir scroll horizontal en toda la página */
   width: 100%;
+  /* Ocultar scrollbar en todos los navegadores */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE y Edge */
+}
+
+/* Ocultar scrollbar en Chrome, Safari y Opera */
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -65,6 +75,16 @@ body {
   overflow-x: hidden;
   width: 100%;
   position: relative;
+  /* Ocultar scrollbar en todos los navegadores */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE y Edge */
+}
+
+/* Ocultar scrollbar en Chrome, Safari y Opera */
+body::-webkit-scrollbar {
+  display: none;
 }
 
 /* ===========================================

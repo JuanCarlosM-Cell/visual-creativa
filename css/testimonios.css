@@ -57,8 +57,9 @@
 /* Tarjeta de Testimonio */
 .testimonio-card {
     min-width: 100%;
-    padding: 0 20px;
+    flex-shrink: 0;
     position: relative;
+    box-sizing: border-box;
 }
 
 .testimonio-content {
@@ -71,6 +72,8 @@
     position: relative;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 /* Borde superior animado */
